@@ -1,16 +1,16 @@
 These are the step by step results of the scrips included in the run_analysis.R file:  
   
 **1. Download the dataset**  
-     -filename <- "dataset.zip"
+     -filename <- "dataset.zip"  
      -if (!file.exists(filename)){
-       fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+       fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"  
+       download.file(fileURL,filename)  
+     }  
      The dataset is downloaded from the provided link and saved in the dataset.zip file.  
-       download.file(fileURL,filename)
-     }
-     -if (!dir.exists("UCI HAR Dataset")){
-       unzip(filename)     
-     This file is unzipped into the folder UCI HAR Dataset  
-     If the file or the folder already exists they are not created.  
+     -if (!dir.exists("UCI HAR Dataset")){  
+       unzip(filename)  
+     This file is unzipped into the folder UCI HAR Dataset    
+     If the file or the folder already exists they are not created.    
 
       
 **2. The information is loaded into table variables:**  
@@ -50,35 +50,35 @@ These are the step by step results of the scrips included in the run_analysis.R 
      -neat_Data$code <- activities[neat_Data$code,2]  
 	The code column is replaced with the value from the second column in activities table.   
 
-**6. Appropriately labels the data set with descriptive variable names.  **
+**6. Appropriately labels the data set with descriptive variable names.**
      -names(neat_Data)[2] = "Activity"  
-	-The second column title is changed to Activity  
+	 The second column title is changed to Activity  
      -names(neat_Data)<-gsub("Acc", "Accelerometer", names(neat_Data))  
-	-The Acc word is replaced with Accelerometer in all of the column titles	  
+	 The Acc word is replaced with Accelerometer in all of the column titles	  
      -names(neat_Data)<-gsub("Gyro", "Gyroscope", names(neat_Data))  
-	-The Gyro word is replaced with Gyroscope in all of the column titles	  
+	 The Gyro word is replaced with Gyroscope in all of the column titles	  
      -names(neat_Data)<-gsub("BodyBody", "Body", names(neat_Data))  
-	-The BodyBody word is replaced with Body in all of the column titles	  
+	 The BodyBody word is replaced with Body in all of the column titles	  
      -names(neat_Data)<-gsub("Mag", "Magnitude", names(neat_Data))  
-	-The Mag word is replaced with Magnitude in all of the column titles  
+	 The Mag word is replaced with Magnitude in all of the column titles  
      -names(neat_Data)<-gsub("^t", "Time", names(neat_Data))  
-	-The words starting with are replaced with Frecuency in all of the column titles  
+	 The words starting with are replaced with Frecuency in all of the column titles  
      -names(neat_Data)<-gsub("^f", "Frequency", names(neat_Data))  
-	-The words starting with f are replaced with Frecuency inall of the column titles  
+	 The words starting with f are replaced with Frecuency inall of the column titles  
      -names(neat_Data)<-gsub("tBody", "TimeBody", names(neat_Data))  
-	-The tBody word is replaced with TimeBody in all of the column titles  
+	 The tBody word is replaced with TimeBody in all of the column titles  
      -names(neat_Data)<-gsub("-mean()", "Mean", names(neat_Data), ignore.case = TRUE)  
-	-The -mean() word is replaced with Mean in all of the column titles in any casing  
+	 The -mean() word is replaced with Mean in all of the column titles in any casing  
      -names(neat_Data)<-gsub("-std()", "STD", names(neat_Data), ignore.case = TRUE)  
-	-The -std() word is replaced with STD in all of the column titles in any casing  
+	 The -std() word is replaced with STD in all of the column titles in any casing  
      -names(neat_Data)<-gsub("-freq()", "Frequency", names(neat_Data), ignore.case = TRUE)  
-	-The -freq() word is replaced with Frequency in all of the column titles in any casing  
+	 The -freq() word is replaced with Frequency in all of the column titles in any casing  
      -names(neat_Data)<-gsub("angle", "Angle", names(neat_Data))  
-	-The angle word is replaced with Angle in all of the column titles  
+	 The angle word is replaced with Angle in all of the column titles  
      -names(neat_Data)<-gsub("gravity", "Gravity", names(neat_Data))  
-	-The gravity word is replaced with Gravity in all of the column titles  
+	 The gravity word is replaced with Gravity in all of the column titles  
 		
-**7. From the data set in previous step, creates a second, independent tidy data set with the average of each variable for each activity and each subject.  **
+**7. From the data set in previous step, creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
      -TidyData <- neat_Data %>%  
         group_by(subject, Activity) %>%  
         summarise_all(funs(mean))  
