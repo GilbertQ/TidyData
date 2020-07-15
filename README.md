@@ -1,7 +1,5 @@
 This is the submission for the project from Getting and Cleaning Data course.
 
-The details of the tasks performed for the analysis of the Human Activity Recognition dataset are:
-
 Dataset:  
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
