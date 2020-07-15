@@ -1,11 +1,19 @@
 These are the step by step results of the scrips included in the run_analysis.R file:  
   
-1. Download the dataset  
+**1. Download the dataset**  
+     -filename <- "dataset.zip"
+     -if (!file.exists(filename)){
+       fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
      The dataset is downloaded from the provided link and saved in the dataset.zip file.  
+       download.file(fileURL,filename)
+     }
+     -if (!dir.exists("UCI HAR Dataset")){
+       unzip(filename)     
      This file is unzipped into the folder UCI HAR Dataset  
-      If the file or the folder already exists they are not created.  
+     If the file or the folder already exists they are not created.  
 
-2. The information is loaded into table variables:  
+      
+**2. The information is loaded into table variables:**  
      -features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))  
      	This information comes from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ 	and tGyro-XYZ (561 obs. of  2 variables).   
      -activities <-read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("code", "activity"))  
@@ -24,7 +32,7 @@ These are the step by step results of the scrips included in the run_analysis.R 
 	This is the information of the labels for the codes of the test activities (2947 obs. of 1 variable)  
 
 
-3. Merges the training and the test sets to create one data set.  
+**3. Merges the training and the test sets to create one data set.**  
      -x <- rbind(x_train, x_test)  
 	Both data from x train and test parts are merged into a new variable (10299 obs. of 561 variables)  
      -y <- rbind(y_train, y_test)  
@@ -34,15 +42,15 @@ These are the step by step results of the scrips included in the run_analysis.R 
      -merged_Data <- cbind(subject, y, x)  
 	The three variables are merged into a new dataset (10299 obs. of 563 variables)  
 
-4. Extracts only the measurements on the mean and standard deviation for each measurement:  
+**4. Extracts only the measurements on the mean and standard deviation for each measurement:**
      -neat_Data <- merged_Data %>% select(subject, code, contains("mean"), contains("std"))  
 	Selecting only the mean and the std subjects the new data is filtered (10299 obs. of 88 variables)  
 
-5. Uses descriptive activity names to name the activities in the data set  
+**5. Uses descriptive activity names to name the activities in the data set**
      -neat_Data$code <- activities[neat_Data$code,2]  
 	The code column is replaced with the value from the second column in activities table.   
 
-6. Appropriately labels the data set with descriptive variable names.  
+**6. Appropriately labels the data set with descriptive variable names.  **
      -names(neat_Data)[2] = "Activity"  
 	-The second column title is changed to Activity  
      -names(neat_Data)<-gsub("Acc", "Accelerometer", names(neat_Data))  
@@ -70,7 +78,7 @@ These are the step by step results of the scrips included in the run_analysis.R 
      -names(neat_Data)<-gsub("gravity", "Gravity", names(neat_Data))  
 	-The gravity word is replaced with Gravity in all of the column titles  
 		
-7. From the data set in previous step, creates a second, independent tidy data set with the average of each variable for each activity and each subject.  
+**7. From the data set in previous step, creates a second, independent tidy data set with the average of each variable for each activity and each subject.  **
      -TidyData <- neat_Data %>%  
         group_by(subject, Activity) %>%  
         summarise_all(funs(mean))  
