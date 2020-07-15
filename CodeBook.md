@@ -2,7 +2,7 @@ These are the step by step results of the scrips included in the run_analysis.R 
   
 **1. Download the dataset**  
      -filename <- "dataset.zip"  
-     -if (!file.exists(filename)){
+     -if (!file.exists(filename)){  
        fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"    
        download.file(fileURL,filename)  
      }  
