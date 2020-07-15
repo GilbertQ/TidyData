@@ -2,19 +2,19 @@ These are the step by step results of the scrips included in the run_analysis.R 
   
 **1. Download the dataset**  
      ```
-     filename <- "dataset.zip"  
-     if (!file.exists(filename)){  
+     filename <- "dataset.zip"  \
+     if (!file.exists(filename)){  \
        fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"    
-       download.file(fileURL,filename)  
-     }
+       download.file(fileURL,filename)  \
+     }\
      ```
-     The dataset is downloaded from the provided link and saved in the dataset.zip file.  
+     The dataset is downloaded from the provided link and saved in the dataset.zip file.  \
      ```
-     if (!dir.exists("UCI HAR Dataset")){  
-       unzip(filename)
-     }
+     if (!dir.exists("UCI HAR Dataset")){  \
+       unzip(filename)  \
+     }  \
      ```
-     This file is unzipped into the folder UCI HAR Dataset    
+     This file is unzipped into the folder UCI HAR Dataset  \
      If the file or the folder already exists they are not created.    
 
       
